@@ -1,0 +1,7 @@
+(ns tictactoe.view-spec
+	(:require [speclj.core :refer :all]
+            [tictactoe.views :refer :all]))
+
+(describe "welcome-screen"
+	(it "displays a welcome message"
+		(should= "Hello and Welcome to TicTacToe!" (welcome-message))))
