@@ -11,3 +11,4 @@
 			lines (line-seq (io/reader (java.io.ByteArrayInputStream. (.getBytes output))))]
 		(prn output)
 		(should= "Winner" (last lines)))))
+
