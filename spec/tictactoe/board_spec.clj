@@ -28,13 +28,6 @@
 	(it "returns a seq of formatted rows for display purposes"
 		(should= '(("X" "X" "X")("O" "--" "O")("--" "--" "--"))
 			(formatted-board @horizontally-won-board))))
-(describe "fill-space"
-	(it "fills a space on the board"
-		(should= (fill-space 0 "X" @empty-board) ["X" " " " " " " " " " " " " " " " "])))
-
-(describe "clear-space"
-	(it "clears a space on the board"
-		(should= (clear-space 0 ["X" " " " " " " " " " " " " " " " "]) @empty-board)))
 
 (describe "space-is-empty?"
    (it "returns true if there is no marker on the given space"
@@ -95,4 +88,19 @@
 
 (describe "cats-game?"
    (it "returns true if the board is full and there is no winner"
-	(should= true (cats-game? @cats-game-board))))))))))
+	(should= true (cats-game? @cats-game-board))))
+
+(describe "valid-spot-choice?"
+	(it "returns true if the given choice is a number between 0-9 and the corresponding spot on the given board is empty"
+		(should= "0" (valid-spot-choice? "0" @empty-board)))
+	(it "returns nil if the given choice is not a number between 0-9 and the corresponding spot on the given board is not empty"
+	(should= nil (valid-spot-choice? "0" @horizontally-won-board))))
+
+(describe "fill-space"
+	(it "returns a board with a space filled if the position is valid"
+		(should= ["X" " " " " " " " " " " " " " " " "] (fill-space "0" "X" @empty-board)))
+	(it "returns false if the position is invalid"
+		(should= false (fill-space "*" "X" @empty-board)))
+	(it "returns false if the position on the board is already filled"
+		(should= false (fill-space "0" "X" @horizontally-won-board))))))))))
+

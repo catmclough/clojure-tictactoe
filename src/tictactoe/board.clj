@@ -1,13 +1,10 @@
-(ns tictactoe.board)
+(ns tictactoe.board
+	(:require [tictactoe.output :as output]
+           	  [tictactoe.view :as view]
+		  [tictactoe.input :as input]))
 
 (defn make-board []
 	(vec (repeat 9 " ")))
-
-(defn fill-space [position marker board]
-	(assoc board position marker))
-
-(defn clear-space [position board]
-	(fill-space position " " board))
 
 (defn space-is-empty? [position board]
 	(clojure.string/blank? (nth board position)))
@@ -32,7 +29,6 @@
 
 (defn formatted-board [board]
 	(partition 3 (replace {" " "--"} board)))	
-
 (defn horizontal-winner? [board]
   	(let [horizontals (horizontal-slices board)]
     	(or (and (not-any? clojure.string/blank? (first horizontals)) (apply = (first horizontals)))
@@ -67,4 +63,12 @@
 (defn cats-game? [board]
   (and (not (winner? board)) (filled? board)))
 
+(defn valid-spot-choice? [choice board]
+	(and (some #{choice} (vec (map #(str %)(range 9))))
+	     (some #{choice} (vec (map #(str %) (available-spaces board))))))
 
+(defn fill-space 
+	[choice marker board]
+		(if (valid-spot-choice? choice board)
+			(assoc board (Integer/parseInt choice) marker)
+			false))
