@@ -4,8 +4,6 @@
 		  [tictactoe.view :as view]
 		  [tictactoe.board :as board]))
 
-(def empty-board [" " " " " " " " " " " " " " " " " "])
-
 (defn print-board [board]
 	(doseq [row (board/formatted-board board)]
 		(output/displayln (vec row))))
@@ -18,6 +16,7 @@
 			(if (not new-board)
 				(recur (get-spot "X"))
 				new-board))))
+
 (defn -main []
 	(output/displayln view/welcome-message) (loop [board (board/make-board)]	
 		(print-board board)
