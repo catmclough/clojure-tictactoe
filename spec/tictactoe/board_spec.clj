@@ -3,16 +3,16 @@
             [tictactoe.board :refer :all]))
 
 (describe "board"
-	(with empty-board [" " " " " " " " " " " " " " " " " "])
+	(with empty-board [0 1 2 3 4 5 6 7 8])
 
 (describe "horizontally-won-board"
-  (with horizontally-won-board ["X" "X" "X" "O" " " "O" " " " " " "])
+  (with horizontally-won-board ["X" "X" "X" "O" 4 "O" 6 7 8])
 
 (describe "vertically-won-board"
-  (with vertically-won-board ["X" "O" "X" "X" "O" " " "X" " " "O"])
+  (with vertically-won-board ["X" "O" "X" "X" "O" 5 "X" 7 "O"])
 
 (describe "diagonnally-won-board"
-  (with diagonally-won-board ["X" "O" "X" " " "X" " " "O" " " "X"])
+  (with diagonally-won-board ["X" "O" "X" 3 "X" 5 "O" 7 "X"])
 
 (describe "cats-game-board"
   (with cats-game-board ["X" "O" "X" "O" "X" "O" "O" "X" "O"])
@@ -21,13 +21,8 @@
   (with x-first-players ["X" "O"])
 
 (describe "make-board"
-	(it "makes a board with nine empty spaces"
+	(it "makes a board with nine empty spaces represented as numbers"
 		(should= (make-board) @empty-board)))
-
-(describe "formatted-board"
-	(it "returns a seq of formatted rows for display purposes"
-		(should= '(("X" "X" "X")("O" "--" "O")("--" "--" "--"))
-			(formatted-board @horizontally-won-board))))
 
 (describe "space-is-empty?"
    (it "returns true if there is no marker on the given space"
@@ -43,20 +38,20 @@
 
 (describe "horizontal-slices"
   (it "returns three collections containing the markers or spaces on the horizontal rows of a given board"
-    (should= '(("X" "X" "X") ("O" " " "O") (" " " " " ")) 
+    (should= '(("X" "X" "X") ("O" 4 "O") (6 7 8)) 
 	(horizontal-slices @horizontally-won-board))))
 
 (describe "vertical-slices"
   (it "returns three collections containing the markers or spaces on the vertical axes of the given board"
-    (should= '(("X" "O" " ") ("X" " " " ") ("X" "O" " ")) (vertical-slices @horizontally-won-board))))
+    (should= '(("X" "O" 6) ("X" 4 7) ("X" "O" 8)) (vertical-slices @horizontally-won-board))))
 
 (describe "diagonal-one"
   (it "returns a list containing the markers or spaces on the first diagonal of the given board"
-    (should= '("X" " " " ") (diagonal-one @horizontally-won-board))))
+    (should= '("X" 4 8) (diagonal-one @horizontally-won-board))))
 
 (describe "diganol-two"
   (it "returns a list containing the markers or spaces on the second diagonal of the given board"
-    (should= '("X" " " " ") (diagonal-two @horizontally-won-board))))
+    (should= '("X" 4 6) (diagonal-two @horizontally-won-board))))
 
 (describe "horizontal-winner?"
   (it "returns true if there is a winner on a horizontal axis"
@@ -98,9 +93,8 @@
 
 (describe "fill-space"
 	(it "returns a board with a space filled if the position is valid"
-		(should= ["X" " " " " " " " " " " " " " " " "] (fill-space "0" "X" @empty-board)))
+		(should= ["X" 1 2 3 4 5 6 7 8] (fill-space "0" "X" @empty-board)))
 	(it "returns false if the position is invalid"
 		(should= false (fill-space "*" "X" @empty-board)))
 	(it "returns false if the position on the board is already filled"
 		(should= false (fill-space "0" "X" @horizontally-won-board))))))))))
-

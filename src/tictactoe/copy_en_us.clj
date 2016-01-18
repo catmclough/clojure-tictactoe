@@ -1,4 +1,4 @@
-(ns tictactoe.view)
+(ns tictactoe.copy-en-us)
 
 (def welcome-message "Hello and Welcome to TicTacToe!")
 

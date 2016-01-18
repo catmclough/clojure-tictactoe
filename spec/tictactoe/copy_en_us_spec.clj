@@ -1,6 +1,6 @@
-(ns tictactoe.view-spec
+(ns tictactoe.copy-en-us-spec
 	(:require [speclj.core :refer :all]
-            [tictactoe.view :refer :all]))
+            [tictactoe.copy-en-us :refer :all]))
 
 (describe "welcome-screen"
 	(it "displays a welcome message"
