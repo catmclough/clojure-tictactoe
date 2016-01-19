@@ -1,6 +1,7 @@
-(ns tictactoe.output-spec
+(ns tictactoe.setup-spec
   (:require [speclj.core :refer :all]
-            [tictactoe.setup :refer :all]))
+            [tictactoe.setup :refer :all]
+            [clojure.java.io :as io]))
 
 (describe "board"
 	(with empty-board [0 1 2 3 4 5 6 7 8])
@@ -11,6 +12,11 @@
 
 (describe "setup-game"
     (it "prints a welcome message"
-        (should= (copy/welcome-message) (welcome-player)))
+        (let [output (with-out-str (welcome-players))
+              lines (line-seq (io/reader
+                                (java.io.ByteArrayInputStream.
+                                (.getBytes output))))]
+              (should= "Hello and Welcome to TicTacToe!" (last lines))))
+
     (it "sets the player's markers"
-        (should= 2 (count set-player-markers)))))
+        (should= 2 (count (set-player-markers))))))

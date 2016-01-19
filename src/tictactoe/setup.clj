@@ -1,18 +1,18 @@
 (ns tictactoe.setup
-   (:require [tictactoe.output :as output]
+   (:require [tictactoe.interface :as interface]
              [tictactoe.copy-en-us :as copy]))
 
 
-(defn welcome-player []
- 	(output/displayln copy/welcome-message))
+(defn welcome-players []
+ 	(interface/displayln copy/welcome-message))
 
-(defn set_player_markers []
+(defn set-player-markers []
   ["X" "O"])
 
 (defn make-board []
 	(vec (range 9)))
 
 (defn setup-game []
-  (welcome-player))
+  (welcome-players))
 
 
