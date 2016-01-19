@@ -3,8 +3,6 @@
            	[tictactoe.copy-en-us :as copy]
 		        [tictactoe.input :as input]))
 
-(defn make-board []
-	(vec (range 9)))
 
 (defn space-is-empty? [position board]
 	(number? (nth board position)))
@@ -14,6 +12,16 @@
 
 (defn available-spaces [board]
 	(filter #(space-is-empty? % board) (range 9)))
+
+(defn player-up-next [board]
+  (let [x-count (get (frequencies board) "X")
+        o-count (get (frequencies board) "O")]
+    (if (= x-count nil)
+        "X")
+    (if (= o-count nil)
+        "O")
+    (if (<= x-count o-count)
+        "X")))
 
 (defn horizontal-slices [board]
   	(partition 3 board))
@@ -26,8 +34,6 @@
 
 (defn diagonal-two [board]
  	(list (nth board 2) (nth board 4) (nth board 6)))
-
-	
 
 (defn horizontal-winner? [board]
   	(let [horizontals (horizontal-slices board)]

@@ -20,10 +20,6 @@
 (describe "x-first-players"
   (with x-first-players ["X" "O"])
 
-(describe "make-board"
-	(it "makes a board with nine empty spaces represented as numbers"
-		(should= (make-board) @empty-board)))
-
 (describe "space-is-empty?"
    (it "returns true if there is no marker on the given space"
    (should= true (space-is-empty? 0 @empty-board))))
@@ -36,10 +32,15 @@
    (it "returns a list of indeces referring to empty spaces on the board"
 	(should= '(0 1 2 3 4 5 6 7 8) (available-spaces @empty-board))))
 
+(describe "player-up-next"
+  (it "returns 'X' if there are no markers on the board"
+      (should= "X" (player-up-next @empty-board)))
+  (it "returns 'O' if there are more Xs on the board than Os"
+      (should= "O" (player-up-next ["X" 1 2 3 4 5 6 7 8]))))
+
 (describe "horizontal-slices"
   (it "returns three collections containing the markers or spaces on the horizontal rows of a given board"
-    (should= '(("X" "X" "X") ("O" 4 "O") (6 7 8)) 
-	(horizontal-slices @horizontally-won-board))))
+    (should= '(("X" "X" "X") ("O" 4 "O") (6 7 8))	(horizontal-slices @horizontally-won-board))))
 
 (describe "vertical-slices"
   (it "returns three collections containing the markers or spaces on the vertical axes of the given board"
