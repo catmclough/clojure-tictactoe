@@ -1,28 +1,31 @@
-(ns tictactoe.core 
-    (:require [tictactoe.output :as output]
-              [tictactoe.input :as input] 
+(ns tictactoe.core
+    (:require
+              [tictactoe.setup :as setup]
+              [tictactoe.interface :as interface]
               [tictactoe.copy-en-us :as copy]
-              [tictactoe.board :as board]))
+              [tictactoe.board :as board]
+              [tictactoe.ai :as ai]))
 
-(defn print-board [board]
-	(doseq [row (output/formatted-board board)]
-		(output/displayln (vec row))))
-
-(defn get-spot [player]
-  (do (output/display (copy/player-turn-prompt player)) (flush) (input/get-input)))
+(defn get-spot [player board]
+  (if (= player "X")
+      (do (interface/display (copy/player-turn-prompt player)) (flush) (interface/get-input))
+      (do (interface/displayln "AI is Considering the Options") (ai/choose-move board))))
 
 (defn pick-next-spot [board]
-	(loop [choice (get-spot "X")]
-		(let [new-board (board/fill-space choice "X" board)]
-			(if (not new-board)
-				(recur (get-spot "X"))
-				new-board))))
+  (let [active-player (board/player-up-next board)]
+    (loop [choice (get-spot active-player board)]
+		  (let [new-board (board/fill-space choice active-player board)]
+        (if (not new-board)
+	  			(recur (get-spot active-player))
+	  			new-board)))))
 
 (defn -main []
-	(output/displayln copy/welcome-message)
-    (loop [board (board/make-board)]
-		  (print-board board)
-		  (if (board/winner? board)
-			  (println "Winner")
-			  (recur (pick-next-spot board)))))
+  (setup/setup-game)
+  (loop [board (setup/make-board)]
+		  (interface/print-board board)
+		  (if (board/filled? board)
+        (do
+			      (cond (board/winner board) (interface/winner-message)
+                  (board/cats-game? board) (interface/cats-game-message)))
+        (recur (pick-next-spot board)))))
 
