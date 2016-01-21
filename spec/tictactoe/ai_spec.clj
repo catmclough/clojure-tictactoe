@@ -3,16 +3,26 @@
             [tictactoe.ai :refer :all]))
 
 (describe "choose-move"
-  (xit "returns the best move when it means instant victory for the AI"
-    (def board ["X" "O" "X" 4 "O" 5 "X" 7 8])
-    (should= "7" (choose-move board))))
+  (it "chooses to win the game when a possible move leads to direct victory"
+      (def board [0 "X" 2
+                  3 "O" "X"
+                 "X" 7 "O"])
+      (should= "0" (choose-move board)))
 
-(describe "score-spot"
+  (it "always chooses the winning spot"
+      (def board [0  "O" "X" "X" 4 "O" "X" "O" "X"])
+      (should= "4" (choose-move board)))
+
+  (it "returns the best move when it means a direct block of the opponent's chance to win"
+    (def board ["X" "X" 2 "O" 4 5 "X" 7 "O"])
+    (should= "2" (choose-move board))))
+
+(describe "score-game"
     (it "returns 1 if the ai has won the given board state"
-        (should= 1 (score-spot ["O" "X" "X" "O" "O" "X" "O" "X" "O"])))
-    
+        (should= 1 (score-game ["O" "X" "X" "O" "O" "X" "O" "X" "O"])))
+
     (it "returns 0 if the given board state is a tie" 
-        (should= 0 (score-spot ["O" "X" "O" "X" "O" "X" "X" "O" "X"])))
+        (should= 0 (score-game ["O" "X" "O" "X" "O" "X" "X" "O" "X"])))
 
     (it "returns -1 if the ai would lose in the given board state"
-        (should= -1 (score-spot ["X" "X" "X" "O" "X" "O" "O" "O" "X"]))))
+        (should= -1 (score-game ["X" "X" "X" "O" "X" "O" "O" "O" "X"]))))
