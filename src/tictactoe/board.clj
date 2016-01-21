@@ -11,7 +11,7 @@
 (defn available-spaces [board]
 	(filter #(space-is-empty? % board) (range 9)))
 
-(defn player-up-next [board]
+(defn active-player [board]
   (let [x-count (get (frequencies board) "X")
         o-count (get (frequencies board) "O")]
     (cond (= x-count nil) "X"

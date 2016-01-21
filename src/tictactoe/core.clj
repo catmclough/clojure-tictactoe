@@ -12,11 +12,11 @@
       (do (interface/displayln "AI is Considering the Options") (ai/choose-move board))))
 
 (defn pick-next-spot [board]
-  (let [active-player (board/player-up-next board)]
+  (let [active-player (board/active-player board)]
     (loop [choice (get-spot active-player board)]
 		  (let [new-board (board/fill-space choice active-player board)]
         (if (not new-board)
-	  			(recur (get-spot active-player))
+	  			(recur (get-spot active-player board))
 	  			new-board)))))
 
 (defn -main []

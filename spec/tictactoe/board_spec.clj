@@ -32,11 +32,12 @@
    (it "returns a list of indeces referring to empty spaces on the board"
 	(should= '(0 1 2 3 4 5 6 7 8) (available-spaces @empty-board))))
 
-(describe "player-up-next"
+(describe "active-player"
   (it "returns 'X' if there are no markers on the board"
-      (should= "X" (player-up-next @empty-board)))
+      (should= "X" (active-player @empty-board)))
+
   (it "returns 'O' if there are more Xs on the board than Os"
-      (should= "O" (player-up-next ["X" 1 2 3 4 5 6 7 8]))))
+      (should= "O" (active-player ["X" 1 2 3 4 5 6 7 8]))))
 
 (describe "horizontal-slices"
   (it "returns three collections containing the markers or spaces on the horizontal rows of a given board"
