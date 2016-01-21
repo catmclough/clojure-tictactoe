@@ -5,7 +5,7 @@
 (defn space-is-empty? [position board]
 	(number? (nth board position)))
 
-(defn filled? [board] 
+(defn filled? [board]
 	(not-any? number? board))
 
 (defn available-spaces [board]
@@ -56,9 +56,6 @@
                 (first (first diagonals))
             (and (not-any? number? (second diagonals)) (apply = (second diagonals)))
                 (first (second diagonals)))))
-
-;(defn winner? [board]
-;  (or (horizontal-winner board) (vertical-winner board) (diagonal-winner board)))
 
 (defn winner [board]
   (or (horizontal-winner board) (vertical-winner board) (diagonal-winner board)))
