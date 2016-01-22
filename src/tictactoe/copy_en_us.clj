@@ -7,6 +7,7 @@
 
 (def ai-choosing-message "AI is Considering the Options")
 
-(def winner-message "Winner!")
+(defn winner-message [winner]
+  (str "Game Over.\n" winner " has won the game."))
 
 (def cats-game-message "Game of Cats, this is a Cats Game")

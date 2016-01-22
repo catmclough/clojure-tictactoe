@@ -21,13 +21,13 @@
   (displayln copy/welcome-message))
 
 (defn prompt-player-turn [marker]
-  (displayln (copy/player-turn-prompt marker)))
+  (display (copy/player-turn-prompt marker)))
 
 (defn ai-choosing []
   (displayln copy/ai-choosing-message))
 
-(defn winner-message []
-  (displayln copy/winner-message))
+(defn winner-message [winner]
+  (displayln (copy/winner-message winner)))
 
 (defn cats-game-message []
   (displayln copy/cats-game-message))
