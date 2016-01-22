@@ -19,7 +19,7 @@
 	  			new-board)))))
 
 (defn end-game [board]
-  (cond (board/winner board) (interface/winner-message)
+  (cond (board/winner board) (interface/winner-message (board/winner board))
         (board/cats-game? board) (interface/cats-game-message)))
 
 (defn -main []
