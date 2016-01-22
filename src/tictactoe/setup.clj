@@ -1,10 +1,9 @@
 (ns tictactoe.setup
-   (:require [tictactoe.interface :as interface]
-             [tictactoe.copy-en-us :as copy]))
+   (:require [tictactoe.interface :as interface]))
 
 
 (defn welcome-players []
- 	(interface/displayln copy/welcome-message))
+ 	(interface/welcome-player))
 
 (defn set-player-markers []
   ["X" "O"])

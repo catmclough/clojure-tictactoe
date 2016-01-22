@@ -1,6 +1,4 @@
-(ns tictactoe.board
-	(:require
-      [tictactoe.copy-en-us :as copy]))
+(ns tictactoe.board)
 
 (defn space-is-empty? [position board]
 	(number? (nth board position)))
