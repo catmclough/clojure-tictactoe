@@ -2,7 +2,7 @@
 
 (def welcome-message "Hello and Welcome to TicTacToe!")
 
-(defn player-turn-prompt [marker] 
+(defn player-turn-prompt [marker]
  (str "Player " marker ", please choose your spot: "))
 
 (def winner-message "Winner!")

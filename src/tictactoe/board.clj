@@ -1,6 +1,6 @@
 (ns tictactoe.board
 	(:require
-           	[tictactoe.copy-en-us :as copy]))
+      [tictactoe.copy-en-us :as copy]))
 
 (defn space-is-empty? [position board]
 	(number? (nth board position)))
@@ -62,6 +62,11 @@
 
 (defn cats-game? [board]
   (and (not (winner board)) (filled? board)))
+
+(defn game-over? [board]
+  (cond (winner board) true
+        (cats-game? board) true
+        :else false))
 
 (defn valid-spot-choice? [choice board]
 	(and (some #{choice} (vec (map #(str %)(range 9))))

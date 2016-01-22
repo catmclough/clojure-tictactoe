@@ -19,13 +19,15 @@
 	  			(recur (get-spot active-player board))
 	  			new-board)))))
 
+(defn end-game [board]
+  (cond (board/winner board) (interface/winner-message)
+        (board/cats-game? board) (interface/cats-game-message)))
+
 (defn -main []
   (setup/setup-game)
   (loop [board (setup/make-board)]
 		  (interface/print-board board)
-		  (if (board/filled? board)
-        (do
-			      (cond (board/winner board) (interface/winner-message)
-                  (board/cats-game? board) (interface/cats-game-message)))
+		  (if (board/game-over? board)
+        (end-game board)
         (recur (pick-next-spot board)))))
 

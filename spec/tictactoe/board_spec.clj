@@ -87,10 +87,20 @@
    (it "returns true if the board is full and there is no winner"
 	(should= true (cats-game? @cats-game-board))))
 
+(describe "game-over?"
+   (it "returns true if there is a winner, even if the board is not filled"
+       (should= true (game-over? @horizontally-won-board)))
+
+   (it "returns true if there is no winner but the board is full"
+       (should= true (game-over? @cats-game-board)))
+   
+   (it "returns false if the game is not over"
+       (should= false (game-over? @empty-board))))
+
 (describe "valid-spot-choice?"
 	(it "returns true if the given choice is a number between 0-9 and the corresponding spot on the given board is empty"
 		(should= "0" (valid-spot-choice? "0" @empty-board)))
-	
+
   (it "returns nil if the given choice is not a number between 0-9 and the corresponding spot on the given board is not empty"
 	(should= nil (valid-spot-choice? "0" @horizontally-won-board))))
 
