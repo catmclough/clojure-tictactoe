@@ -20,14 +20,6 @@
 (describe "x-first-players"
   (with x-first-players ["X" "O"])
 
-(describe "space-is-empty?"
-   (it "returns true if there is no marker on the given space"
-       (should= true (space-is-empty? 0 @empty-board))))
-
-(describe "filled?"
-   (it "returns true if there are no empty spaces on the given board"
-	     (should= true (filled? @cats-game-board))))
-
 (describe "available-spaces"
    (it "returns a list of indeces referring to empty spaces on the board"
        (should= '(0 1 2 3 4 5 6 7 8) (available-spaces @empty-board)))
@@ -41,38 +33,6 @@
 
    (it "returns 'O' if there are more Xs on the board than Os"
        (should= "O" (active-player ["X" 1 2 3 4 5 6 7 8]))))
-
-(describe "horizontal-slices"
-   (it "returns three collections containing the markers or spaces
-       on the horizontal rows of a given board"
-       (should= '(("X" "X" "X") ("O" 4 "O") (6 7 8))	(horizontal-slices @horizontally-won-board))))
-
-(describe "vertical-slices"
-   (it "returns three collections containing the markers or spaces on the vertical axes
-       of the given board"
-       (should= '(("X" "O" 6) ("X" 4 7) ("X" "O" 8)) (vertical-slices @horizontally-won-board))))
-
-(describe "diagonal-one"
-    (it "returns a list containing the markers or spaces on the first diagonal of the given board"
-       (should= '("X" 4 8) (diagonal-one @horizontally-won-board))))
-
-(describe "diganol-two"
-    (it "returns a list containing the markers or spaces on the second diagonal of the given board"
-       (should= '("X" 4 6) (diagonal-two @horizontally-won-board))))
-
-(describe "horizontal-winner"
-    (it "returns marker of winner if there is a winner on a horizontal axis"
-       (should= "X" (horizontal-winner @horizontally-won-board)))
-
-    (it "returns nil if there is no winner on a horizontal axis"
-       (should= nil (horizontal-winner @empty-board))))
-
-(describe "vertical-winner"
-    (it "returns nil if theres is a winner on a vertical axis"
-       (should= "X" (vertical-winner @vertically-won-board)))
-
-    (it "returns nil if there is no winner on a vertical axis"
-       (should= nil (vertical-winner @empty-board))))
 
 (describe "winner"
     (it "returns the winning marker if there is a winner on any axis"

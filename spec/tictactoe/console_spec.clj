@@ -18,11 +18,6 @@
 		(should= "XOXO"
       (with-in-str "XOXO" (get-input)))))
 
-(describe "formatted-board"
-	(it "returns a seq of formatted rows for display purposes"
-		(should= '(("X" "X" "X")("O" 4 "O")(6 7 8))
-			(formatted-board ["X" "X" "X" "O" 4 "O" 6 7 8]))))
-
 (describe "print-board"
   (it "send the formatted board to the output"
     (should= "[0 1 2]\n[3 4 5]\n[6 7 8]\n"
