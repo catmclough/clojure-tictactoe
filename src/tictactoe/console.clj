@@ -10,7 +10,7 @@
 (defn get-input []
 	(read-line))
 
-(defn formatted-board [board]
+(defn- formatted-board [board]
 	(partition 3 board))
 
 (defn print-board [board]

@@ -4,10 +4,10 @@
 (def player-two "O")
 (def board-size 9)
 
-(defn space-is-empty? [position board]
+(defn- space-is-empty? [position board]
 	(number? (nth board position)))
 
-(defn filled? [board]
+(defn- filled? [board]
 	(not-any? number? board))
 
 (defn available-spaces [board]
@@ -21,19 +21,19 @@
           (<= x-count o-count) player-one
           :else player-two)))
 
-(defn horizontal-slices [board]
+(defn- horizontal-slices [board]
   	(partition 3 board))
 
-(defn vertical-slices [board]
+(defn- vertical-slices [board]
   	(apply map list (horizontal-slices board)))
 
-(defn diagonal-one [board]
+(defn- diagonal-one [board]
   	(list (nth board 0) (nth board 4) (nth board 8)))
 
-(defn diagonal-two [board]
+(defn- diagonal-two [board]
  	(list (nth board 2) (nth board 4) (nth board 6)))
 
-(defn horizontal-winner [board]
+(defn- horizontal-winner [board]
   	(let [horizontals (horizontal-slices board)]
     	(cond
         (and (not-any? number? (first horizontals)) (apply = (first horizontals)))
@@ -43,7 +43,7 @@
         (and (not-any? number? (nth horizontals 2)) (apply = (nth horizontals 2)))
             (first (nth horizontals 2)))))
 
-(defn vertical-winner [board]
+(defn- vertical-winner [board]
   (let [verticals (vertical-slices board)]
     (cond (and (not-any? number? (first verticals)) (apply = (first verticals)))
               (first (first verticals))
@@ -52,7 +52,7 @@
           (and (not-any? number? (nth verticals 2)) (apply = (nth verticals 2)))
               (first (nth verticals 2)))))
 
-(defn diagonal-winner [board]
+(defn- diagonal-winner [board]
   (let [diagonals ((fn [x] (list (diagonal-one x) (diagonal-two x))) board)]
       (cond (and (not-any? number? (first diagonals)) (apply = (first diagonals)))
                 (first (first diagonals))
