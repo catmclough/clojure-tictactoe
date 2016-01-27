@@ -1,9 +1,8 @@
 (ns tictactoe.setup
-   (:require [tictactoe.interface :as interface]))
-
+   (:require [tictactoe.console :as console]))
 
 (defn welcome-players []
- 	(interface/welcome-player))
+ 	(console/welcome-player))
 
 (defn set-player-markers []
   ["X" "O"])
@@ -13,5 +12,4 @@
 
 (defn setup-game []
   (welcome-players))
-
 

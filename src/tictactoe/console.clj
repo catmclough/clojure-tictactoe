@@ -1,4 +1,4 @@
-(ns tictactoe.interface
+(ns tictactoe.console
     (:require [tictactoe.copy-en-us :as copy]))
 
 (defn displayln [message]
@@ -31,3 +31,4 @@
 
 (defn cats-game-message []
   (displayln copy/cats-game-message))
+

@@ -1,5 +1,9 @@
 (ns tictactoe.board)
 
+(def player-one "X")
+(def player-two "O")
+(def board-size 9)
+
 (defn space-is-empty? [position board]
 	(number? (nth board position)))
 
@@ -7,15 +11,15 @@
 	(not-any? number? board))
 
 (defn available-spaces [board]
-	(filter #(space-is-empty? % board) (range 9)))
+	(filter #(space-is-empty? % board) (range board-size)))
 
 (defn active-player [board]
-  (let [x-count (get (frequencies board) "X")
-        o-count (get (frequencies board) "O")]
-    (cond (= x-count nil) "X"
-          (= o-count nil) "O"
-          (<= x-count o-count) "X"
-          :else "O")))
+  (let [x-count (get (frequencies board) player-one)
+        o-count (get (frequencies board) player-two)]
+    (cond (= x-count nil) player-one
+          (= o-count nil) player-two
+          (<= x-count o-count) player-one
+          :else player-two)))
 
 (defn horizontal-slices [board]
   	(partition 3 board))
