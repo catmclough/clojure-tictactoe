@@ -11,11 +11,6 @@
 		(should= (make-board) @empty-board)))
 
 (describe "setup-game"
-  (it "prints a welcome message"
-    (let [output (with-out-str (welcome-players))
-      lines (line-seq (io/reader (java.io.ByteArrayInputStream.(.getBytes output))))]
-        (should= "Hello and Welcome to TicTacToe!" (last lines)))))
-
   (it "sets the player's markers"
     (should= "X" player-one)
-    (should= "O" player-two)))
+    (should= "O" player-two))))

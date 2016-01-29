@@ -7,6 +7,9 @@
 (defn display [message]
 	(print message))
 
+(defn clear-screen []
+  (print "\u001b[2J"))
+
 (defn get-input []
 	(read-line))
 
@@ -16,6 +19,10 @@
 (defn print-board [board]
 	(doseq [row (formatted-board board)]
 		(displayln (vec row))))
+
+(defn refresh-round [board]
+    (clear-screen)
+		(print-board board))
 
 (defn welcome-player []
   (displayln copy/welcome-message))

@@ -2,6 +2,11 @@
   (:require [speclj.core :refer :all]
             [tictactoe.board :refer :all]))
 
+(defn invalid-spot-choice [choice board]
+    (try
+      (fill-space choice "X" board)
+      (catch Exception e (str "Caught Exception: " (.getMessage e)))))
+
 (describe "board"
 	(with empty-board [0 1 2 3 4 5 6 7 8])
 
@@ -66,9 +71,9 @@
 	 (it "returns a board with a new space filled if the position is valid"
 		   (should= ["X" 1 2 3 4 5 6 7 8] (fill-space "0" "X" @empty-board)))
 
-	 (it "returns false if the position is invalid"
-		   (should= false (fill-space "*" "X" @empty-board)))
+	 (it "throws an exception if the spot choice is invalid"
+		   (should= "Caught Exception: Invalid Spot Choice." (invalid-spot-choice "*" @empty-board)))
 
-	 (it "returns false if the position on the board is already filled"
-		   (should= false (fill-space "0" "X" @horizontally-won-board))))))))))
+	 (it "throws an exception if the spot is not empty"
+		   (should= "Caught Exception: Invalid Spot Choice." (invalid-spot-choice 0 @horizontally-won-board))))))))))
 

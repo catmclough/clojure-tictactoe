@@ -81,4 +81,4 @@
 	[choice marker board]
 		(if (valid-spot-choice? choice board)
 			(assoc board (Integer/parseInt choice) marker)
-			false))
+		  (throw (Exception. "Invalid Spot Choice."))))
