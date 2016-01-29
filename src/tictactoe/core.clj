@@ -15,18 +15,11 @@
 (defn pick-and-validate-next-spot [board]
   (let [active-player (board/active-player board)]
     (loop [choice (get-spot-choice active-player board)]
-      ;(let [new-board
-        (try
-          (board/fill-space choice active-player board)
-          (catch Exception e
-            (do
-              (println (.getMessage e))
-              (recur (get-spot-choice active-player board))))
-          new-board))))
-
-        ;(if (not new-board)
-					;(recur (get-spot-choice active-player board))
-					;new-board)))))
+        (or
+          (try
+            (board/fill-space choice active-player board)
+            (catch Exception e (console/displayln (.getMessage e))))
+          (recur (get-spot-choice active-player board))))))
 
 (defn end-game [board]
   (cond (board/winner board) (console/winner-message (board/winner board))
