@@ -27,8 +27,8 @@
 (defn -main []
   (setup/setup-game)
   (loop [board (setup/make-board)]
-		  (console/print-board board)
-		  (if (board/game-over? board)
-        (end-game board)
-        (recur (pick-and-validate-next-spot board)))))
+      (console/refresh-round board)
+      	(if (board/game-over? board)
+          (end-game board)
+          (recur (pick-and-validate-next-spot board)))))
 
