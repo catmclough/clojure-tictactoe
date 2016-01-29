@@ -4,8 +4,9 @@
 (defn welcome-players []
  	(console/welcome-player))
 
-(defn set-player-markers []
-  ["X" "O"])
+(def player-one "X")
+
+(def player-two "O")
 
 (defn make-board []
 	(vec (range 9)))

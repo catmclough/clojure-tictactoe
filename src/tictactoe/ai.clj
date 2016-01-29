@@ -1,7 +1,7 @@
 (ns tictactoe.ai
   (:require [tictactoe.board :as board]))
 
-(def ai-marker "O")
+(def ai-marker board/player-two)
 
 (defn- hypothetical-boards [board]
   (let [open-spots (board/available-spaces board)]

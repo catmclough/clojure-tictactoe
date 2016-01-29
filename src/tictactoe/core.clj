@@ -5,7 +5,7 @@
               [tictactoe.board :as board]
               [tictactoe.ai :as ai]))
 
-(def player-one "X")
+(def player-one board/player-one)
 
 (defn get-spot-choice [player board]
   (if (= player player-one)

@@ -1,7 +1,10 @@
-(ns tictactoe.board)
+(ns tictactoe.board
+  (:require [tictactoe.setup :as setup]))
 
-(def player-one "X")
-(def player-two "O")
+(def player-one setup/player-one)
+
+(def player-two setup/player-two)
+
 (def board-size 9)
 
 (defn- space-is-empty? [position board]
@@ -71,7 +74,7 @@
         :else false))
 
 (defn valid-spot-choice? [choice board]
-	(and (some #{choice} (vec (map #(str %)(range 9))))
+	(and (some #{choice} (vec (map #(str %)(range board-size))))
 	     (some #{choice} (vec (map #(str %) (available-spaces board))))))
 
 (defn fill-space
