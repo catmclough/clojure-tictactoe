@@ -3,15 +3,19 @@
               [tictactoe.core :refer :all]
               [clojure.java.io :as io]))
 
-;(describe "-main;"
-  ;(around [it]
-    ;(with-out-str (it)))
+(defn make-input [entries]
+  (apply str (interleave entries (repeat "\n"))))
 
-  ;(xit "welcomes the players"
-      ;(should= "Hello and Welcome to Tic-Tac-Toe!\n")
+(describe "main"
+  (around [it]
+    (with-out-str (it)))
 
-  ;(xit "prints uses the output to display the current board state"
-      ;(let [output (with-out-str "[0 1 2]\n[3 4 5]\n[6 7 8]\n")
-        ;lines (line-seq (io/reader (java.io.ByteArrayInputStream.(.getBytes output))))]
-        ;(should= output (last lines))))))
+  (it "handles all spot-choice input without breaking"
+      (should= nil (with-in-str (make-input '("*" "*" "3" "3" "0" "beep-boop" "1")))))
+
+  (it "runs, receiving input and updating the board, but ends if computer wins"
+      (should= nil (with-in-str (make-input '("3" "0" "1")) (-main))))
+
+  (it "runs, receiving input and updating the board, but ends if game is tied"
+      (should= nil (with-in-str (make-input '("0" "8" "1" "6" "5")) (-main)))))
 
