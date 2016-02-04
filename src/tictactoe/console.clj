@@ -27,6 +27,9 @@
 (defn welcome-player []
   (displayln copy/welcome-message))
 
+(defn give-game-type [type]
+  (displayln (copy/game-type type)))
+
 (defn prompt-player-turn [marker]
   (display (copy/player-turn-prompt marker)))
 

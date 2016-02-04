@@ -11,6 +11,7 @@
 (defn make-board []
 	(vec (range 9)))
 
-(defn setup-game []
-  (welcome-players))
+(defn setup-game [game-type]
+  (welcome-players)
+  (console/give-game-type game-type))
 
