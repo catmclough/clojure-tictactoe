@@ -7,6 +7,8 @@
     (cond (= type 2) "Two Computer"
           (= type 1) "Player (X) vs. Computer (O)")))
 
+(def game-type-prompt "Enter 1 to play an AI, or 2 to see 2 AIs play eachother: ")
+
 (defn player-turn-prompt [marker]
  (str "Player " marker ", please choose your spot: "))
 

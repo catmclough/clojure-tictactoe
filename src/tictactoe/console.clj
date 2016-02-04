@@ -13,6 +13,12 @@
 (defn get-input []
 	(read-line))
 
+(defn game-type-prompt []
+  (display copy/game-type-prompt))
+
+(defn get-game-type []
+  (Integer/parseInt (get-input)))
+
 (defn- formatted-board [board]
 	(partition 3 board))
 
