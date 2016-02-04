@@ -3,6 +3,8 @@
             [tictactoe.console :refer :all]
             [tictactoe.copy-en-us :as copy]))
 
+
+
 (describe "displayln"
 	(it "outputs the given message to the console with a newline"
 		(should= "Hello There!\n"
@@ -17,6 +19,17 @@
 	(it "receives input from the command line"
 		(should= "XOXO"
       (with-in-str "XOXO" (get-input)))))
+
+(describe "game-type-prompt"
+  (around [it]
+    (with-out-str (it)))
+
+  (it "prompts the player to choose what type of game they'd like to play"
+    (should= copy/game-type-prompt (with-out-str (game-type-prompt)))))
+
+(describe "get-game-type"
+  (it "returns an integer representing the chosen game type"
+    (should= 1 (with-in-str "1" (get-game-type)))))
 
 (describe "print-board"
   (it "send the formatted board to the output"
