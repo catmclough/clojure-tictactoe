@@ -7,10 +7,13 @@
 
 (def player-one board/player-one)
 
+(def chosen-type 2)
+
 (defn get-spot-choice [player board]
   (if (= player player-one)
-      (do (console/prompt-player-turn player) (flush) (console/get-input))
-      (do (console/ai-choosing) (ai/choose-move board))))
+      ;(do (console/prompt-player-turn player) (flush) (console/get-input))
+      (do (console/ai-choosing) (ai/choose-move board "X"))
+      (do (console/ai-choosing) (ai/choose-move board "O"))))
 
 (defn pick-and-validate-next-spot [board]
   (let [active-player (board/active-player board)]
@@ -26,7 +29,7 @@
         (board/cats-game? board) (console/cats-game-message)))
 
 (defn -main []
-  (setup/setup-game)
+  (setup/setup-game chosen-type)
   (loop [board (setup/make-board)]
       (console/refresh-round board)
       	(if (board/game-over? board)
