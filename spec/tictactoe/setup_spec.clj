@@ -14,3 +14,4 @@
   (it "sets the player's markers"
     (should= "X" player-one)
     (should= "O" player-two))))
+

@@ -1,13 +1,15 @@
 (ns tictactoe.ai
   (:require [tictactoe.board :as board]))
 
+(def score-value 10)
+
 (defn- hypothetical-boards [board]
   (let [open-spots (board/available-spaces board)]
     (map #(board/fill-space (str %) (board/active-player board) board) open-spots)))
 
 (defn- score-game [board-state player depth]
-  (cond (= player (board/winner board-state)) (- 10 depth)
-      (and (board/winner board-state) (not= player (board/winner board-state))) (- depth 10)
+  (cond (= player (board/winner board-state)) (- score-value depth)
+      (and (board/winner board-state) (not= player (board/winner board-state))) (- depth score-value)
       :else 0))
 
 (defn- minimax

@@ -13,8 +13,9 @@
 (defn get-input []
 	(read-line))
 
-(defn game-type-prompt []
-  (display copy/game-type-prompt))
+(defn game-type-prompt [player-ai-game-type two-ai-game-type]
+  (display (copy/game-type-prompt player-ai-game-type two-ai-game-type))
+  (flush))
 
 (defn get-game-type []
   (Integer/parseInt (get-input)))
@@ -33,8 +34,11 @@
 (defn welcome-player []
   (displayln copy/welcome-message))
 
-(defn give-game-type [type]
-  (displayln (copy/game-type type)))
+(defn player-ai-game-description []
+  (displayln copy/player-ai-game-description))
+
+(defn two-ai-game-description []
+  (displayln copy/two-ai-game-description))
 
 (defn prompt-player-turn [marker]
   (display (copy/player-turn-prompt marker)))

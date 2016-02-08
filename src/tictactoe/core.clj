@@ -10,7 +10,7 @@
 (defn get-spot-choice [player board game-type]
   (if (= player player-one)
     (do
-      (if (= game-type 1)
+      (if (= game-type setup/player-ai-game-type)
         (do (console/prompt-player-turn player) (flush) (console/get-input))
         (do (console/ai-choosing) (ai/choose-move board "X"))))
     (do (console/ai-choosing) (ai/choose-move board "O"))))

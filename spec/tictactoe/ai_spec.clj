@@ -75,4 +75,3 @@
     (it "never allows AI to lose, meaning it always ties when playing another AI"
       (should= nil (winner-of-two-ai-simulated-game)))))
 
-

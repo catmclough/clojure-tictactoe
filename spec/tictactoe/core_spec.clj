@@ -16,6 +16,7 @@
   (it "runs, receiving input and updating the board, but ends if game is tied"
       (should= nil (with-in-str (make-input '("1" "0" "8" "1" "6" "5")) (-main)))))
 
-  (context "Player vs. AI Game"
+  (context "Invalid Input"
+    (tags :slow)
     (it "handles all spot-choice input without breaking"
       (should= nil (with-in-str (make-input '("1" "*" "*" "3" "3" "0" "beep-boop" "1"))))))

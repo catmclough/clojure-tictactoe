@@ -3,7 +3,9 @@
             [tictactoe.console :refer :all]
             [tictactoe.copy-en-us :as copy]))
 
+(def player-ai-game-type 1)
 
+(def two-ai-game-type 2)
 
 (describe "displayln"
 	(it "outputs the given message to the console with a newline"
@@ -25,11 +27,12 @@
     (with-out-str (it)))
 
   (it "prompts the player to choose what type of game they'd like to play"
-    (should= copy/game-type-prompt (with-out-str (game-type-prompt)))))
+    (should= (copy/game-type-prompt player-ai-game-type two-ai-game-type)
+             (with-out-str (game-type-prompt player-ai-game-type two-ai-game-type)))))
 
 (describe "get-game-type"
   (it "returns an integer representing the chosen game type"
-    (should= 1 (with-in-str "1" (get-game-type)))))
+    (should= player-ai-game-type (with-in-str (str player-ai-game-type) (get-game-type)))))
 
 (describe "print-board"
   (it "send the formatted board to the output"

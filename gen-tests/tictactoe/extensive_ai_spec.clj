@@ -10,7 +10,7 @@
 
 (def ai-player "O")
 
-(def num-tests 2)
+(def num-tests 23)
 
 (defn get-spot-choice [player board]
   (if (= player human-player)
