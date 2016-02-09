@@ -31,7 +31,7 @@
 
 (defn -main []
   (let [game-type (setup/setup-game)]
-    (loop [board (setup/make-board board/board-size)]
+    (loop [board (board/make-board board/board-size)]
       (console/refresh-round board)
        	(if (board/game-over? board)
           (end-game board)
