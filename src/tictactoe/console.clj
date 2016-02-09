@@ -10,15 +10,20 @@
 (defn clear-screen []
   (print "\u001b[2J"))
 
-(defn get-input []
-	(read-line))
+(defn get-int-input []
+  (let [input (read-line)]
+    (try
+      (Integer/parseInt input)
+      (catch Exception e
+        (do (displayln (str "Invalid entry " (.getMessage e) "\nInput should be an integer."))
+            (get-int-input))))))
 
 (defn game-type-prompt [player-ai-game-type two-ai-game-type]
   (display (copy/game-type-prompt player-ai-game-type two-ai-game-type))
   (flush))
 
 (defn get-game-type []
-  (Integer/parseInt (get-input)))
+  (get-int-input))
 
 (defn- formatted-board [board]
 	(partition 3 board))
@@ -41,7 +46,8 @@
   (displayln copy/two-ai-game-description))
 
 (defn prompt-player-turn [marker]
-  (display (copy/player-turn-prompt marker)))
+  (display (copy/player-turn-prompt marker))
+  (flush))
 
 (defn ai-choosing []
   (displayln copy/ai-choosing-message))

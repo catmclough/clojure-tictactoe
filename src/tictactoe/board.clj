@@ -14,7 +14,7 @@
 	(not-any? number? board))
 
 (defn available-spaces [board]
-	(filter #(space-is-empty? % board) (range board-size)))
+  (filter #(space-is-empty? % board) (range (count board))))
 
 (defn active-player [board]
   (let [x-count (get (frequencies board) player-one)
@@ -74,12 +74,12 @@
         :else false))
 
 (defn valid-spot-choice? [choice board]
-	(and (some #{choice} (vec (map #(str %)(range board-size))))
-	     (some #{choice} (vec (map #(str %) (available-spaces board))))))
+	(and (some #{choice} (range board-size))
+	     (some #{choice} (available-spaces board))))
 
 (defn fill-space
 	[choice marker board]
 		(if (valid-spot-choice? choice board)
-			(assoc board (Integer/parseInt choice) marker)
+			(assoc board choice marker)
 		  (throw (Exception. "Invalid Spot Choice."))))
 

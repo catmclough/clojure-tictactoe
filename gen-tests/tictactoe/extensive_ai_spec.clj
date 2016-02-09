@@ -2,44 +2,50 @@
   (:require [speclj.core :refer :all]
             [tictactoe.board :as board]
             [tictactoe.ai :as ai]))
-            ;[clojure.test.check.generators :as gen]
-            ;[clojure.test.check :as tc]
-            ;[clojure.test.check.properties :as prop]))
 
 (def human-player "X")
 
 (def ai-player "O")
 
-(def num-tests 23)
+(defn player-can-win?
+  ([board]
+    (player-can-win? board (board/available-spaces board)))
+  ([board spots-to-check]
+    (if (empty? spots-to-check)
+      false
+      (if (= human-player (board/winner (board/fill-space (first spots-to-check) human-player board)))
+        true
+        (recur board (rest spots-to-check))))))
 
-(defn get-spot-choice [player board]
-  (if (= player human-player)
-    (str (rand-nth (board/available-spaces board)))
-    (ai/choose-move board ai-player)))
+(defn choose-best-player-move
+  ([board]
+    (choose-best-player-move board (board/available-spaces board)))
+  ([board open-spots]
+    (if (= 1 (count open-spots))
+      (first open-spots)
+      (if (= ai-player (board/winner (board/fill-space (first open-spots) ai-player board)))
+        (first open-spots)
+        (recur board (rest open-spots))))))
 
-(defn play-next-turn [board]
-  (let [active-player (board/active-player board)
-        choice (get-spot-choice active-player board)]
-      (board/fill-space choice active-player board)))
+(defn ai-did-not-lose? [board]
+  (if (or (= (board/winner board) ai-player) (board/cats-game? board))
+    true
+    false))
 
-(defn simulated-game-winner []
-  (loop [board (vec (range 9))]
+(defn ai-cannot-lose?
+  ([]
+    (ai-cannot-lose? (vec (range 9))))
+  ([board]
     (if (board/game-over? board)
-      (cond (board/winner board) (board/winner board)
-        (board/cats-game? board) "tie")
-        (recur (play-next-turn board)))))
-
-(defn print-stats [winners]
-  (println (str "AI Marker: " ai-player))
-  (println (str "Player Marker: " human-player))
-  (println (str "AI is playing " num-tests " games vs. a randomly guessing 'human'."))
-  (print "Winners: ")
-  (apply println winners))
+      (ai-did-not-lose? board)
+      (if (= (board/active-player board) ai-player)
+        (recur (board/fill-space (ai/choose-move board ai-player) ai-player board))
+        (if (= true (player-can-win? board))
+          false
+          (recur (board/fill-space (choose-best-player-move board) human-player board)))))))
 
 (describe "Generate Many AI Board Outcomes"
   (tags :gen)
   (it "the AI never loses when using the 'choose-move' algorithm"
-    (let [winners (repeatedly num-tests simulated-game-winner)]
-      (print-stats winners)
-      (should= nil (some #(= human-player %) winners)))))
+      (should= true (ai-cannot-lose?))))
 

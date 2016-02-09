@@ -69,7 +69,7 @@
 
 (describe "fill-space"
 	 (it "returns a board with a new space filled if the position is valid"
-		   (should= ["X" 1 2 3 4 5 6 7 8] (fill-space "0" "X" @empty-board)))
+		   (should= ["X" 1 2 3 4 5 6 7 8] (fill-space 0 "X" @empty-board)))
 
 	 (it "throws an exception if the spot choice is invalid"
 		   (should= "Caught Exception: Invalid Spot Choice." (invalid-spot-choice "*" @empty-board)))

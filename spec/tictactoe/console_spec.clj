@@ -17,10 +17,10 @@
 		(should= "Hello There!"
 			(with-out-str (display "Hello There!")))))
 
-(describe "get-input"
+(describe "get-int-input"
 	(it "receives input from the command line"
-		(should= "XOXO"
-      (with-in-str "XOXO" (get-input)))))
+		(should= 2
+      (with-in-str "2" (get-int-input)))))
 
 (describe "game-type-prompt"
   (around [it]

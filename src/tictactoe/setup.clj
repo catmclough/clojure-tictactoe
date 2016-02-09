@@ -12,8 +12,8 @@
 
 (def two-ai-game-type 2)
 
-(defn make-board []
-	(vec (range 9)))
+(defn make-board [size]
+	(vec (range size)))
 
 (defn valid-type-choice? [choice]
   (or (= player-ai-game-type choice) (= two-ai-game-type choice)))
