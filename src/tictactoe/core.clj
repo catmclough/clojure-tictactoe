@@ -11,7 +11,8 @@
   (if (= player player-one)
     (do
       (if (= game-type setup/player-ai-game-type)
-        (do (console/prompt-player-turn player) (flush) (console/get-input))
+        (do (console/prompt-player-turn player)
+            (console/get-int-input))
         (do (console/ai-choosing) (ai/choose-move board "X"))))
     (do (console/ai-choosing) (ai/choose-move board "O"))))
 
@@ -30,7 +31,7 @@
 
 (defn -main []
   (let [game-type (setup/setup-game)]
-    (loop [board (setup/make-board)]
+    (loop [board (setup/make-board board/board-size)]
       (console/refresh-round board)
        	(if (board/game-over? board)
           (end-game board)

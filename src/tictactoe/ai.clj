@@ -5,7 +5,7 @@
 
 (defn- hypothetical-boards [board]
   (let [open-spots (board/available-spaces board)]
-    (map #(board/fill-space (str %) (board/active-player board) board) open-spots)))
+    (map #(board/fill-space % (board/active-player board) board) open-spots)))
 
 (defn- score-game [board-state player depth]
   (cond (= player (board/winner board-state)) (- score-value depth)
@@ -32,5 +32,5 @@
 
 (defn choose-move [board player]
   (let [scores (get-scores board player)]
-    (str (:space (apply max-key :score scores)))))
+    (:space (apply max-key :score scores))))
 
