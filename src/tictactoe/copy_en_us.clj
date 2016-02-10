@@ -8,7 +8,7 @@
 
 (defn game-type-prompt [player-ai-game-type two-ai-game-type]
   (str "Enter " player-ai-game-type " to play an AI. \n"
-       "Enter " two-ai-game-type "to see 2 AIs play eachother: "))
+       "Enter " two-ai-game-type " to see 2 AIs play eachother: "))
 
 (defn player-turn-prompt [marker]
  (str "Player " marker ", please choose your spot: "))

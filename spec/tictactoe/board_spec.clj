@@ -76,8 +76,8 @@
 		   (should= ["X" 1 2 3 4 5 6 7 8] (fill-space 0 "X" @empty-board)))
 
 	 (it "throws an exception if the spot choice is invalid"
-		   (should= "Caught Exception: Invalid Spot Choice." (invalid-spot-choice "*" @empty-board)))
+		   (should= "Caught Exception: Invalid Spot Choice. Please enter the number of an open spot on the board." (invalid-spot-choice "*" @empty-board)))
 
 	 (it "throws an exception if the spot is not empty"
-		   (should= "Caught Exception: Invalid Spot Choice." (invalid-spot-choice 0 @horizontally-won-board))))))))))
+		   (should= "Caught Exception: Invalid Spot Choice. Please enter the number of an open spot on the board." (invalid-spot-choice 0 @horizontally-won-board))))))))))
 

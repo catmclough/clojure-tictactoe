@@ -1,6 +1,8 @@
 (ns tictactoe.console
     (:require [tictactoe.copy-en-us :as copy]))
 
+(def row-length 3)
+
 (defn displayln [message]
 	(println message))
 
@@ -15,7 +17,8 @@
     (try
       (Integer/parseInt input)
       (catch Exception e
-        (do (displayln (str "Invalid entry " (.getMessage e) "\nInput should be an integer."))
+        (do (display (str "Invalid entry " (.getMessage e) "\nPlease enter a valid integer: "))
+            (flush)
             (get-int-input))))))
 
 (defn game-type-prompt [player-ai-game-type two-ai-game-type]
@@ -26,7 +29,7 @@
   (get-int-input))
 
 (defn- formatted-board [board]
-	(partition 3 board))
+	(partition row-length board))
 
 (defn print-board [board]
 	(doseq [row (formatted-board board)]
