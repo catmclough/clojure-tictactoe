@@ -88,5 +88,5 @@
 	[choice marker board]
 		(if (valid-spot-choice? choice board)
 			(assoc board choice marker)
-		  (throw (Exception. "Invalid Spot Choice."))))
+		  (throw (Exception. "Invalid Spot Choice. Please enter the number of an open spot on the board."))))
 
