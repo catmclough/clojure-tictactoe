@@ -7,8 +7,8 @@
 
 (def board-size 9)
 
-(defn make-board [size]
-	(vec (range size)))
+(defn make-board []
+	(vec (range board-size)))
 
 (defn- space-is-empty? [position board]
 	(number? (nth board position)))

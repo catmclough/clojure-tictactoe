@@ -12,7 +12,7 @@
 
 (describe "make-board"
 	(it "makes a board with nine empty spaces represented as numbers"
-		(should= (make-board board-size) @empty-board)))
+		(should= (make-board) @empty-board)))
 
 (describe "horizontally-won-board"
   (with horizontally-won-board ["X" "X" "X" "O" 4 "O" 6 7 8])

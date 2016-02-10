@@ -32,7 +32,7 @@
 	(doseq [row (formatted-board board)]
 		(displayln (vec row))))
 
-(defn refresh-round [board]
+(defn refresh-board [board]
     (clear-screen)
 		(print-board board))
 
