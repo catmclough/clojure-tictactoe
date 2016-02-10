@@ -7,6 +7,10 @@
 
 (def board-size 9)
 
+(def side-length 3)
+
+(def middle-spot 4)
+
 (defn make-board []
 	(vec (range board-size)))
 
@@ -28,16 +32,16 @@
           :else player-two)))
 
 (defn- horizontal-slices [board]
-  	(partition 3 board))
+  	(partition side-length board))
 
 (defn- vertical-slices [board]
   	(apply map list (horizontal-slices board)))
 
 (defn- diagonal-one [board]
-  	(list (nth board 0) (nth board 4) (nth board 8)))
+  	(list (first board) (nth board middle-spot) (last board)))
 
 (defn- diagonal-two [board]
- 	(list (nth board 2) (nth board 4) (nth board 6)))
+ 	(list (nth board (dec side-length)) (nth board middle-spot) (nth board (- board-size side-length))))
 
 (defn- horizontal-winner [board]
   	(let [horizontals (horizontal-slices board)]
@@ -46,8 +50,8 @@
             (first (first horizontals))
         (and (not-any? number? (second horizontals)) (apply = (second horizontals)))
             (first (second horizontals))
-        (and (not-any? number? (nth horizontals 2)) (apply = (nth horizontals 2)))
-            (first (nth horizontals 2)))))
+        (and (not-any? number? (nth horizontals (dec side-length))) (apply = (nth horizontals (dec side-length))))
+            (first (nth horizontals (dec side-length))))))
 
 (defn- vertical-winner [board]
   (let [verticals (vertical-slices board)]
@@ -55,8 +59,8 @@
               (first (first verticals))
           (and (not-any? number? (second verticals)) (apply = (second verticals)))
               (first (second verticals))
-          (and (not-any? number? (nth verticals 2)) (apply = (nth verticals 2)))
-              (first (nth verticals 2)))))
+          (and (not-any? number? (nth verticals (dec side-length))) (apply = (nth verticals (dec side-length))))
+              (first (nth verticals (dec side-length))))))
 
 (defn- diagonal-winner [board]
   (let [diagonals ((fn [x] (list (diagonal-one x) (diagonal-two x))) board)]
