@@ -68,10 +68,4 @@
       (should= 7 (choose-move board-one ai-player))
 
       (def board-two ["X"  1  2 3  "O" "X" 6  "O" "X"])
-      (should= 1 (choose-move board-two ai-player)))
-
-  (context "AI vs. AI game"
-    (tags :slow)
-    (it "never allows AI to lose, meaning it always ties when playing another AI"
-      (should= nil (winner-of-two-ai-simulated-game)))))
-
+      (should= 1 (choose-move board-two ai-player))))
