@@ -1,6 +1,6 @@
-(defproject speclj_ttt "0.1.0-SNAPSHOT"
-  :description "A tic tac toe game and my first project written in Clojure."
-  :url "http://example.com/FIXME"
+(defproject tic-tac-toe "0.1.0-SNAPSHOT"
+  :description "A command line AI tic-tac-toe game written in Clojure."
+  :url "http://https://github.com/catmclough/clojure-tictactoe"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.7.0-RC2"]
